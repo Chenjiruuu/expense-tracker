@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense List</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .btn-add {
+            background-color: #007BFF; /* Blue */
+            margin: 20px auto;
+            display: block;
+            width: 150px;
+        }
+        .btn-add:hover {
+            background-color: #0056b3;
+        }
+        .btn-edit {
+            background-color: #4CAF50; /* Green */
+        }
+        .btn-edit:hover {
+            background-color: #45a049;
+        }
+        .btn-delete {
+            background-color: #f44336; /* Red */
+        }
+        .btn-delete:hover {
+            background-color: #e53935;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">Expense List</h1>
+    <a href="{% url 'add_expense' %}" class="btn btn-add">Add Expense</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.date }}</td>
+                <td>{{ expense.category }}</td>
+                <td>${{ expense.amount }}</td>
+                <td>
+                    <a href="{% url 'edit_expense' expense.pk %}" class="btn btn-edit">Edit</a>
+                    <a href="{% url 'delete_expense' expense.pk %}" class="btn btn-delete">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
